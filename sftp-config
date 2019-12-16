@@ -1,0 +1,9 @@
+{
+    "host": "111111",
+    "protocol": "ftp",
+    "port": 21,
+    "username": "username",
+    "password": "pass",
+    "remotePath": "/public_html/wp-content/themes/nametheme/",
+    "uploadOnSave": true
+}
