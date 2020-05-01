@@ -1,0 +1,42 @@
+
+header.php
+
+<div class="dropdown">
+    <?php lang_switcher_toggle(); ?>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <?php// lang_switcher(); ?>
+    </div> 
+  </div>
+
+
+function.php
+
+
+function lang_switcher(){
+	if (function_exists('icl_get_languages')) {
+		$langs = icl_get_languages('skip_missing=0');
+		foreach ($langs as $lang) {
+			if ($lang['active'] == 0) {
+				$flag = preg_replace(' ', '', $lang['country_flag_url']);
+				$display_lang = ($lang['native_name'] == 'עברית') ? 'עבר' : ucfirst($lang['native_name']);
+			    $strlang =  mb_substr($display_lang,0,3);
+				// $strlang =  $display_lang;
+				echo '<a class="lang-switcher dropdown-item lang-switch" href="'. $lang['url'] .'">'.'<span class=""><img src="'. $lang['country_flag_url'] . '">'. $strlang .'</span></a>';
+			}
+		}
+	}
+}
+
+function lang_switcher_toggle(){
+	if (function_exists('icl_get_languages')) {
+		$langs = icl_get_languages('skip_missing=0');
+		foreach ($langs as $lang) {
+			if ($lang['active'] == 0) {
+				$display_lang = ($lang['native_name'] == 'עברית') ? "עבר" : ucfirst($lang['native_name']);
+			    $strlang =  mb_substr($display_lang,0,3);
+				 $strlang =  $display_lang;
+				 echo '<a class="lang-switcher dropdown-item lang-switch dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="'. $lang['url'] .'">'.'<span class=""><img src="'. esc_url($lang['country_flag_url']) . '">'. $strlang .'</span></a>';
+			}
+		}
+	}
+}
